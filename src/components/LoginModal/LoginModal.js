@@ -13,9 +13,10 @@ import {
     validLength, 
     onlyLowerCaseChars
 } from './../../utils';
+import ErrorPopup from './../ErrorPopup';
 
 const LoginModal = (props) => {
-    const { isLoggedIn, email, password} = useSelector(state => state.app)
+    const { isLoggedIn, email, password, loginErrorMessage} = useSelector(state => state.app)
 
     const dispatch = useDispatch();
     if(isLoggedIn) {
@@ -30,6 +31,7 @@ const LoginModal = (props) => {
         onlyLowerCaseChars(password);
 
     return (<>
+        {!!loginErrorMessage && <ErrorPopup message={loginErrorMessage}/>}
         <Modal/>
         <LoginForm>
             <Title>Login</Title>
