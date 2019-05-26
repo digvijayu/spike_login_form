@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import {ValidityText} from './../../utils/styles';
+import {isValidEmail} from './../../utils';
 
 const EmailInput = ({ email, onChange }) => {
-    return (<Input 
+    const validEmail = isValidEmail(email);
+    return (<>
+        <Input 
         onChange={(e) => onChange(e)} 
-        type="email" 
+        type="text" 
         placeholder="Email"
         name="email" 
         value={email}
-    />)
+    />
+    <ValidityText valid={validEmail}>
+        { validEmail ? 'Email is valid': 'Email should be valid' }
+    </ValidityText>
+    </>)
 } 
 
 export default EmailInput;

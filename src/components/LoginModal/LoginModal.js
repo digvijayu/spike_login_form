@@ -5,6 +5,14 @@ import {loginThunk} from './../../store/thunk';
 import {updateEmail, updatePassword} from './../../store/actions';
 import EmailInput from '../EmailInput/EmailInput';
 import PasswordInput from './../PasswordInput';
+import {
+    isValidEmail,
+    ruleIncreasingStraight, 
+    ruleShouldNotContainLetters, 
+    ruleContainNonOverlappingPairs, 
+    validLength, 
+    onlyLowerCaseChars
+} from './../../utils';
 
 const LoginModal = (props) => {
     const { isLoggedIn, email, password} = useSelector(state => state.app)
@@ -13,6 +21,13 @@ const LoginModal = (props) => {
     if(isLoggedIn) {
         return(<></>);
     }
+
+    const isFormValid = isValidEmail(email) &&
+        ruleIncreasingStraight(password) &&
+        ruleShouldNotContainLetters(password) &&
+        ruleContainNonOverlappingPairs(password) &&
+        validLength(password) &&
+        onlyLowerCaseChars(password);
 
     return (<>
         <Modal/>
@@ -28,6 +43,7 @@ const LoginModal = (props) => {
             />
             <SubmitButton 
                 onClick={() => loginThunk()(dispatch)} 
+                disabled={!isFormValid}
             >Sign In</SubmitButton>
         </LoginForm>
     </>);
@@ -76,7 +92,11 @@ const SubmitButton = styled.button`
     font-weight:800;
     font-size:0.8em;
 
-    &hover {
+    &:hover {
         background:#2CC06B;
+    }
+
+    &:disabled {
+        opacity: 0.5;
     }
 `;
