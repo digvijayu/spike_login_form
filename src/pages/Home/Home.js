@@ -6,6 +6,7 @@ import { logout } from './../../store/actions';
 const Home = (props) => {
     const dispatch = useDispatch();
     return (<HomeContainer>
+        <Header>Hello, User</Header>
         <LogoutButton
             onClick={() => dispatch(logout())}
         >Logout</LogoutButton>
@@ -14,6 +15,7 @@ const Home = (props) => {
 
 const HomeContainer = styled.div`
     height: 100%;
+    padding: 40px;
 `;
 
 const LogoutButton = styled.button`
@@ -28,7 +30,6 @@ const LogoutButton = styled.button`
     margin-top:20px;
     margin-bottom:20px;
     float:left;
-    margin-left:16px;
     font-weight:800;
     font-size:0.8em;
 
@@ -36,5 +37,11 @@ const LogoutButton = styled.button`
         background:#2CC06B;
     }
 `;
+
+const Header =  styled.div`
+    font-size:1.5em;
+    color:#525252;
+`;
+
 
 export default Home;

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {loginThunk} from './../../store/thunk';
 import {updateEmail, updatePassword} from './../../store/actions';
+import EmailInput from '../EmailInput/EmailInput';
+import PasswordInput from './../PasswordInput';
 
 const LoginModal = (props) => {
     const { isLoggedIn, email, password} = useSelector(state => state.app)
@@ -13,22 +15,16 @@ const LoginModal = (props) => {
     }
 
     return (<>
-    <Modal></Modal>
+        <Modal/>
         <LoginForm>
             <Title>Login</Title>
             <EmailInput 
+                email={email}
                 onChange={(e) => dispatch(updateEmail(e.target.value))}
-                type="email" 
-                placeholder="Email" 
-                name="email" 
-                value={email}
             />
             <PasswordInput 
+                password={password}
                 onChange={(e) => dispatch(updatePassword(e.target.value))}
-                type="password" 
-                placeholder="Password" 
-                name="email" 
-                value={password}
             />
             <SubmitButton 
                 onClick={() => loginThunk()(dispatch)} 
@@ -47,7 +43,7 @@ const Modal = styled.div`
     height: 100%;
 `;
 
-const LoginForm = styled.div`
+const LoginForm = styled.form`
     position: fixed;
     width: 400px;
     top: 50%;
@@ -62,28 +58,6 @@ const LoginForm = styled.div`
 const Title =  styled.div`
     font-size:1.5em;
     color:#525252;
-`;
-
-const EmailInput = styled.input`
-    background:#ecf0f1;
-    border: #ccc 1px solid;
-    border-bottom: #ccc 2px solid;
-    padding: 8px;
-    width:250px;
-    color:#AAAAAA;
-    margin-top:10px;
-    font-size:1em;
-    border-radius:4px;
-`;
-
-const PasswordInput = styled.input`
-    border-radius:4px;
-    background:#ecf0f1;
-    border: #ccc 1px solid;
-    padding: 8px;
-    width:250px;
-    font-size:1em;
-    margin-top:10px;
 `;
 
 const SubmitButton = styled.button`
