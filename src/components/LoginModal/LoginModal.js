@@ -1,45 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {loginThunk} from './../../store/thunk';
 import {updateEmail, updatePassword} from './../../store/actions';
 
 const LoginModal = (props) => {
+    const { isLoggedIn, email, password} = useSelector(state => state.app)
+
+    const dispatch = useDispatch();
+    if(isLoggedIn) {
+        return(<></>);
+    }
+
     return (<>
     <Modal></Modal>
-    <LoginForm>
-        <Title>Login</Title>
-        <EmailInput 
-            onChange={(e) => props.updateEmail(e.target.value)}
-            type="email" 
-            placeholder="Email" 
-            name="email" 
-            value={props.email}
-        />
-        <PasswordInput 
-            onChange={(e) => props.updatePassword(e.target.value)}
-            type="password" 
-            placeholder="Password" 
-            name="email" 
-            value={props.password}
-        />
-        <SubmitButton 
-            onClick={() => loginThunk()(props.dispatch)} 
-        >Sign In</SubmitButton>
-    </LoginForm>
+        <LoginForm>
+            <Title>Login</Title>
+            <EmailInput 
+                onChange={(e) => dispatch(updateEmail(e.target.value))}
+                type="email" 
+                placeholder="Email" 
+                name="email" 
+                value={email}
+            />
+            <PasswordInput 
+                onChange={(e) => dispatch(updatePassword(e.target.value))}
+                type="password" 
+                placeholder="Password" 
+                name="email" 
+                value={password}
+            />
+            <SubmitButton 
+                onClick={() => loginThunk()(dispatch)} 
+            >Sign In</SubmitButton>
+        </LoginForm>
     </>);
 }
-const mapStateToProps = state => ({
-    isLoggedIn: state.isLoggedIn,
-    email: state.email,
-    password: state.password
-});
-const mapActionsToProps = dispatch => ({
-    dispatch,
-    updateEmail: email => dispatch(updateEmail(email)),
-    updatePassword: email => dispatch(updatePassword(email)),
-});
-export default connect(mapStateToProps, mapActionsToProps)(LoginModal);
+
+export default LoginModal;
 
 const Modal = styled.div`
     position: fixed;

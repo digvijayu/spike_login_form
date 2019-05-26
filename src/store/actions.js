@@ -10,12 +10,12 @@ export const sendLoginRequest = () => ({
 });
 
 export const loginResponseRecieved = (response) => ({
-    type: ACTION_SEND_LOGIN_REQUEST,
+    type: ACTION_LOGIN_RESPONSE_RECEIVED,
     response
 });
 
 export const loginErrorInResponseRecieved = (error) => ({
-    type: ACTION_SEND_LOGIN_REQUEST,
+    type: ACTION_LOGIN_RESPONSE_ERROR,
     error
 });
 
@@ -29,6 +29,6 @@ export const updatePassword = password => ({
     password
 })
 
-export const Logout = () => ({
+export const logout = () => ({
     type: ACTION_LOGOUT
 })

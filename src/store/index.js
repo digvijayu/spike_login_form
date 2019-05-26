@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { reducer } from './reducers';
 
 const rootReducer = combineReducers({
-  recipes: reducer,
+  app: reducer,
 });
 
 export default function configureStore() {
