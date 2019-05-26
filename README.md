@@ -1,3 +1,16 @@
+# Assignment
+Create a login popup that will log you in for the current session. And only appear when the user hasn't
+logged in yet for the current session.
+
+The login form should consist of a username and password which must comply to the following password
+security requirements:
+
+- Passwords must include one increasing straight of at least three letters, like abc , cde , fgh , and so on, up to xyz .They cannot skip letters; acd doesn't count.
+- Passwords may not contain the letters i, O, or l, as these letters can be mistaken for other characters and are therefore confusing.
+- Passwords must contain at least two non-overlapping pairs of letters, like aa, bb, or cc.
+- Passwords cannot be longer than 32 characters.
+- Passwords can only contain lower case alphabetic characters.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
