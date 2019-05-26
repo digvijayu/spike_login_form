@@ -1,15 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './../../store/actions';
 
 const Home = (props) => {
     const dispatch = useDispatch();
+    const { isLoggedIn, email } = useSelector((state) => ({
+        isLoggedIn: state.app.isLoggedIn,
+        email: state.app.email
+    }))
     return (<HomeContainer>
-        <Header>Hello, User</Header>
-        <LogoutButton
-            onClick={() => dispatch(logout())}
-        >Logout</LogoutButton>
+        {isLoggedIn && 
+            <>
+                <Header>Hello, {email}</Header>
+                <LogoutButton
+                    onClick={() => dispatch(logout())}
+                >Logout</LogoutButton>
+            </>
+        }
+
+        {!isLoggedIn && 
+            <>
+            </>
+        }
     </HomeContainer>)
 }
 

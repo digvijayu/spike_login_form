@@ -32,7 +32,7 @@ export const reducer = (state = initialState, action) => {
         case ACTION_UPDATE_PASSWORD: 
             return {
                 ...state,
-                email: action.password
+                password: action.password
             }   
         case ACTION_LOGOUT: 
             return {

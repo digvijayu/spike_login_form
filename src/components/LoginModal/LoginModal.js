@@ -43,7 +43,7 @@ const Modal = styled.div`
     height: 100%;
 `;
 
-const LoginForm = styled.form`
+const LoginForm = styled.div`
     position: fixed;
     width: 400px;
     top: 50%;
